@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ফলাফল দেখুন | Check Result</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>ফলাফল দেখুন</h1>
+      <p class="sub">Check your examination result</p>
+      <nav aria-label="Main">
+        <a href="/" aria-current="page">ফলাফল / Result</a>
+        <a href="/notice.html">বিজ্ঞপ্তি / Notices</a>
+      </nav>
+    </header>
+
+    <main>
+      <form id="f" novalidate>
+        <div class="row">
+          <label for="exam">পরীক্ষা / Exam
+            <select id="exam" name="exam" required></select>
+          </label>
+          <label for="year">সাল / Year
+            <select id="year" name="year" required></select>
+          </label>
+        </div>
+
+        <label for="roll">রোল নম্বর / Roll
+          <input id="roll" name="roll" inputmode="numeric" autocomplete="off" maxlength="12" required aria-describedby="roll-err">
+          <small id="roll-err" class="field-err" hidden></small>
+        </label>
+
+        <label for="reg">রেজিস্ট্রেশন নম্বর / Registration
+          <input id="reg" name="reg" inputmode="numeric" autocomplete="off" maxlength="15" required aria-describedby="reg-err">
+          <small id="reg-err" class="field-err" hidden></small>
+        </label>
+
+        <button id="go" type="submit">ফলাফল দেখুন</button>
+      </form>
+
+      <p id="msg" role="status" aria-live="polite"></p>
+      <div id="out"></div>
+    </main>
+
+    <footer>
+      <p>সার্ভার ব্যস্ত থাকলে কয়েক সেকেন্ড অপেক্ষা করুন, পেজ নিজে থেকেই আবার চেষ্টা করবে।</p>
+    </footer>
+  </div>
+  <script src="/app.js" defer></script>
+</body>
+</html>

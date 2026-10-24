@@ -1,0 +1,124 @@
+/* Result portal: answer-sheet look. System fonts only (fast on low-end phones,
+   and Bengali renders with the device's own font). */
+
+:root {
+  --paper: #f6f7fb;
+  --field: #ffffff;
+  --ink: #14213d;
+  --muted: #566178;
+  --rule: #c9d0e0;
+  --mark: #ffd84d;   /* highlighter yellow: focus + the one accent */
+  --pass: #0b7a5b;
+  --fail: #b3261e;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #101522;
+    --field: #171e31;
+    --ink: #e8ecf7;
+    --muted: #9aa5bf;
+    --rule: #2c3550;
+    --pass: #4cc79f;
+    --fail: #ff8a80;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 1rem/1.65 system-ui, -apple-system, "Segoe UI", "Noto Sans Bengali", "Kalpurush", "SolaimanLipi", sans-serif;
+}
+
+.wrap { max-width: 36rem; margin: 0 auto; padding: 1.25rem 1rem 3rem; }
+
+header { border-bottom: 3px solid var(--ink); padding-bottom: .75rem; margin-bottom: 1.5rem; }
+h1 { font-size: 1.65rem; line-height: 1.3; margin: 0; }
+h2 { font-size: 1.15rem; margin: 0 0 .25rem; }
+.sub { color: var(--muted); margin: .25rem 0 0; }
+
+nav { display: flex; gap: 1.25rem; margin-top: .75rem; }
+nav a { font-weight: 600; }
+nav a[aria-current="page"] { text-decoration-thickness: 3px; text-decoration-color: var(--mark); }
+
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 3px solid var(--mark);
+  outline-offset: 2px;
+}
+
+/* ---- Form ---- */
+form { display: grid; gap: 1rem; }
+label { display: grid; gap: .25rem; font-weight: 600; }
+label small { font-weight: 400; color: var(--muted); }
+
+input, select {
+  width: 100%;
+  min-height: 3rem;
+  padding: .5rem .75rem;
+  font: inherit;
+  font-size: 1.1rem;
+  color: var(--ink);
+  background: var(--field);
+  border: 2px solid var(--rule);
+  border-bottom: 3px solid var(--ink);
+  border-radius: 2px;
+}
+input[inputmode="numeric"] { letter-spacing: .12em; }
+input[aria-invalid="true"] { border-color: var(--fail); }
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+button {
+  min-height: 3.25rem;
+  font: inherit;
+  font-weight: 700;
+  color: var(--paper);
+  background: var(--ink);
+  border: 0;
+  border-radius: 2px;
+  cursor: pointer;
+}
+button:disabled { opacity: .6; cursor: progress; }
+
+/* ---- Messages ---- */
+#msg { min-height: 1.65rem; margin: 1rem 0 0; font-weight: 600; }
+#msg.err { color: var(--fail); }
+.field-err { color: var(--fail); font-weight: 400; }
+
+/* ---- Marksheet ---- */
+.sheet { margin-top: 1.5rem; border: 2px solid var(--ink); background: var(--field); }
+.sheet-head { display: flex; justify-content: space-between; align-items: end; gap: 1rem; padding: 1rem; border-bottom: 2px solid var(--ink); }
+.sheet-head .who { min-width: 0; overflow-wrap: anywhere; }
+.sheet-head .who strong { display: block; font-size: 1.3rem; line-height: 1.3; }
+.gpa { text-align: right; flex: none; }
+.gpa b { display: block; font-size: 2.6rem; line-height: 1; background: linear-gradient(transparent 62%, var(--mark) 62%); padding: 0 .2rem; color: #14213d; }
+.gpa span { color: var(--muted); font-size: .9rem; }
+
+.status { padding: .5rem 1rem; font-weight: 700; border-bottom: 1px solid var(--rule); }
+.status.pass { color: var(--pass); }
+.status.fail { color: var(--fail); }
+
+dl { margin: 0; }
+dl div { display: grid; grid-template-columns: 9.5rem 1fr; gap: .75rem; padding: .5rem 1rem; border-bottom: 1px solid var(--rule); }
+dt { color: var(--muted); }
+dd { margin: 0; overflow-wrap: anywhere; }
+
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; padding: .5rem 1rem; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+th { color: var(--muted); font-weight: 600; }
+
+/* ---- Notices ---- */
+.notice { padding: 1rem 0; border-bottom: 1px solid var(--rule); }
+.notice time { color: var(--muted); font-size: .9rem; }
+.notice p { margin: .25rem 0 0; }
+
+footer { margin-top: 2.5rem; color: var(--muted); font-size: .9rem; }
+
+@media (max-width: 26rem) {
+  .row { grid-template-columns: 1fr; }
+  dl div { grid-template-columns: 1fr; gap: 0; }
+}
